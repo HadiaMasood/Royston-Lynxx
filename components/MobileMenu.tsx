@@ -10,7 +10,7 @@ export default function MobileMenu() {
   const [servicesOpen, setServicesOpen] = useState(false);
 
   return (
-    <div className="lg:hidden md:hidden flex items-center relative z-50">
+    <div className="lg:hidden flex items-center relative z-50">
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="text-zinc-300 hover:text-gold transition p-2 focus:outline-none bg-[#121215] rounded-xl border border-zinc-800"

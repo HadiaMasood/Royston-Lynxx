@@ -71,7 +71,7 @@ export default function RideWithUs() {
           </Link>
 
           <MobileMenu />
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden lg:flex items-center gap-6">
             <Link href="/" className="text-sm font-medium text-zinc-400 hover:text-gold transition">Home</Link>
             
             <div 
