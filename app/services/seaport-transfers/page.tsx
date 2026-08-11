@@ -229,7 +229,7 @@ export default function SeaportTransfers() {
               <img 
                 src="https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&w=600&q=80" 
                 alt="Cruise Cruise seaport Transfer" 
-                className="w-full h-full object-cover filter brightness-90 grayscale contrast-125 hover:grayscale-0 transition duration-500"
+                className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#121215] to-transparent" />
             </div>

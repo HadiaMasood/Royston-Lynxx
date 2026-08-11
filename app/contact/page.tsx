@@ -214,7 +214,7 @@ export default function ContactUs() {
             <img 
               src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=600&q=80" 
               alt="Southampton Location Map"
-              className="w-full h-full object-cover filter grayscale contrast-125 opacity-40 group-hover:scale-105 transition duration-500"
+              className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition duration-500"
             />
           </div>
 

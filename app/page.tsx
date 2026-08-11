@@ -967,6 +967,14 @@ export default function Home() {
             <p className="text-base text-zinc-300 leading-relaxed max-w-lg">
               Enjoy fixed, competitive rates and dynamic, custom-tailored fleets. We specialise in taxi transfers to and from London Heathrow, Gatwick, Luton, Southampton Airport, and Southampton Cruise Terminal.
             </p>
+            
+            <div className="w-full h-48 rounded-3xl overflow-hidden border border-zinc-800 shadow-xl relative group my-4">
+              <img 
+                src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80" 
+                alt="Royston Lynxx Premium Chauffeur Fleet"
+                className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              />
+            </div>
 
             <div className="grid grid-cols-2 gap-4 pt-2">
               <div className="flex items-start gap-2">
