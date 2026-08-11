@@ -31,13 +31,16 @@ body {
 }
 
 /* Light Mode Theme Overrides */
-.light {
+.light,
+html.light-mode body,
+html.light-mode {
   background-color: #faf9f6 !important;
   color: #18181b !important;
 }
 
 /* Base Body Adjustment when light is active */
-html:has(.light) body {
+html:has(.light) body,
+html.light-mode body {
   background-color: #faf9f6 !important;
   color: #18181b !important;
 }
