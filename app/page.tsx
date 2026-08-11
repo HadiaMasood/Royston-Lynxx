@@ -970,7 +970,7 @@ export default function Home() {
             
             <div className="w-full h-48 rounded-3xl overflow-hidden border border-zinc-800 shadow-xl relative group my-4">
               <img 
-                src="https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=800" 
+                src="https://images.pexels.com/photos/3764984/pexels-photo-3764984.jpeg?auto=compress&cs=tinysrgb&w=800" 
                 alt="Royston Lynxx Premium Chauffeur Fleet"
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
               />
