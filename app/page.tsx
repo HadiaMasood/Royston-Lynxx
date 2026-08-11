@@ -945,7 +945,7 @@ export default function Home() {
               <span>Reliable 5-Star UK Cab Transfer</span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight font-display leading-[1.1] text-white">
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight font-display leading-[1.1] text-white break-words max-w-full">
               Airport Transfers <br className="hidden sm:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-500">Made Simple & Swift.</span>
             </h1>
