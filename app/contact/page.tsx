@@ -357,7 +357,7 @@ export default function ContactUs() {
                 <Car className="w-5 h-5" />
               </div>
               <span className="text-white font-bold tracking-tight text-lg font-display">
-                Quick<span className="text-gold">Hop</span>
+                Royston <span className="text-gold">Lynxx</span>
               </span>
             </div>
             <p className="text-xs leading-relaxed text-zinc-400">
