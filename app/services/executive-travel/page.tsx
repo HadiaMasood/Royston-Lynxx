@@ -213,7 +213,7 @@ export default function ExecutiveTravel() {
           <div className="bg-[#121215] rounded-3xl border border-zinc-800 shadow-xl overflow-hidden flex flex-col">
             <div className="h-48 relative w-full">
               <img 
-                src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=600&q=80" 
+                src="https://images.pexels.com/photos/120049/pexels-photo-120049.jpeg?auto=compress&cs=tinysrgb&w=600" 
                 alt="VIP Executive Travel" 
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
               />

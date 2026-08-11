@@ -227,7 +227,7 @@ export default function SeaportTransfers() {
           <div className="bg-[#121215] rounded-3xl border border-zinc-800 shadow-xl overflow-hidden flex flex-col">
             <div className="h-48 relative w-full">
               <img 
-                src="https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&w=600&q=80" 
+                src="https://images.pexels.com/photos/1577445/pexels-photo-1577445.jpeg?auto=compress&cs=tinysrgb&w=600" 
                 alt="Cruise Cruise seaport Transfer" 
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
               />

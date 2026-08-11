@@ -184,7 +184,7 @@ export default function AboutUs() {
           <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-2xl z-20 pointer-events-none" />
           <div className="h-48 relative w-full">
             <img 
-              src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=600&q=80" 
+              src="https://images.pexels.com/photos/248747/pexels-photo-248747.jpeg?auto=compress&cs=tinysrgb&w=600" 
               alt="Premium Chauffeur" 
               className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
             />
