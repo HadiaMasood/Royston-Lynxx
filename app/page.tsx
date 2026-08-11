@@ -372,6 +372,20 @@ export default function Home() {
     setIsDarkMode(prev => {
       const next = !prev;
       localStorage.setItem('roystonlynxx_dark_mode', String(next));
+      
+      // Update global html element classes so other pages adapt instantly
+      const root = document.documentElement;
+      root.classList.remove('light-mode', 'light', 'dark-mode', 'dark');
+      if (next) {
+        root.classList.add('dark-mode', 'dark');
+        document.body.style.backgroundColor = '#09090b';
+        document.body.style.color = '#f4f4f5';
+      } else {
+        root.classList.add('light-mode', 'light');
+        document.body.style.backgroundColor = '#faf9f6';
+        document.body.style.color = '#18181b';
+      }
+      
       return next;
     });
   };
