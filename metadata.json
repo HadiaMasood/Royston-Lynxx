@@ -1,0 +1,6 @@
+{
+  "name": "Royston Lynxx",
+  "description": "Premium Airport Transfers and Private Hire Taxi Booking Service",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,225 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), var(--font-sans), sans-serif;
+  
+  --color-gold-50: #fbf8f0;
+  --color-gold-100: #f5ebd3;
+  --color-gold-200: #ecd7a5;
+  --color-gold-300: #dfb96c;
+  --color-gold-400: #d19a3b;
+  --color-gold-500: #c58123;
+  --color-gold-600: #a7651b;
+  --color-gold-700: #874c19;
+  --color-gold-800: #6d3c17;
+  --color-gold-900: #593116;
+  --color-gold-950: #331908;
+  
+  /* Brand luxury gold accents */
+  --color-gold: #c5a059;
+  --color-gold-light: #dfb76c;
+  --color-gold-dark: #9e7d3b;
+  --color-dark-bg: #09090b;
+  --color-dark-card: #151518;
+  --color-dark-border: #222227;
+}
+
+body {
+  background-color: var(--color-dark-bg);
+  color: #f4f4f5;
+}
+
+/* Light Mode Theme Overrides */
+.light {
+  background-color: #faf9f6 !important;
+  color: #18181b !important;
+}
+
+/* Base Body Adjustment when light is active */
+html:has(.light) body {
+  background-color: #faf9f6 !important;
+  color: #18181b !important;
+}
+
+/* Light Mode Overrides for Containers & Headers */
+.light header {
+  background-color: rgba(250, 249, 246, 0.9) !important;
+  border-color: #e4e4e7 !important;
+}
+
+.light header span.text-white,
+.light header .text-white {
+  color: #18181b !important;
+}
+
+.light header a,
+.light header button,
+.light header nav button,
+.light header nav a {
+  color: #3f3f46 !important;
+}
+
+.light header a:hover,
+.light header button:hover,
+.light header nav button:hover,
+.light header nav a:hover {
+  color: #9e7d3b !important;
+}
+
+/* Banner override */
+.light div.bg-\[\#121215\] {
+  background-color: #f4f3ef !important;
+  border-color: #e4e4e7 !important;
+  color: #52525b !important;
+}
+
+.light div.bg-\[\#121215\] span,
+.light div.bg-\[\#121215\] a {
+  color: #52525b !important;
+}
+
+.light div.bg-\[\#121215\] a:hover {
+  color: #c5a059 !important;
+}
+
+/* Hero & General Sections Override */
+.light section,
+.light #booking-portal {
+  background-color: #faf9f6 !important;
+  color: #18181b !important;
+}
+
+.light section h1,
+.light section h2,
+.light section h3,
+.light section p {
+  color: #18181b !important;
+}
+
+.light section p.text-zinc-400,
+.light section p.text-zinc-500,
+.light section span.text-zinc-400 {
+  color: #52525b !important;
+}
+
+/* Card Overrides (forms, routes, fleet etc.) */
+.light .bg-\[\#09090b\],
+.light .bg-\[\#121215\],
+.light .bg-\[\#0e0e11\],
+.light .bg-\[\#0a0a0c\],
+.light .bg-zinc-950,
+.light .bg-zinc-900,
+.light .bg-zinc-800\/20,
+.light .bg-black {
+  background-color: #ffffff !important;
+  color: #18181b !important;
+  border-color: #e4e4e7 !important;
+}
+
+/* Text Overrides */
+.light .text-zinc-100,
+.light .text-zinc-200,
+.light .text-zinc-300,
+.light .text-zinc-400,
+.light .text-white {
+  color: #27272a !important;
+}
+
+.light .text-zinc-500 {
+  color: #71717a !important;
+}
+
+.light .text-zinc-400 {
+  color: #52525b !important;
+}
+
+.light .border-zinc-800,
+.light .border-zinc-900,
+.light .border-zinc-800\/80,
+.light .border-zinc-700 {
+  border-color: #e4e4e7 !important;
+}
+
+/* Forms & inputs */
+.light input,
+.light select,
+.light textarea {
+  background-color: #ffffff !important;
+  border-color: #d4d4d8 !important;
+  color: #18181b !important;
+}
+
+.light input::placeholder {
+  color: #a1a1aa !important;
+}
+
+/* Brand badges & custom routes */
+.light .bg-amber-500\/10 {
+  background-color: rgba(197, 160, 89, 0.1) !important;
+  color: #874c19 !important;
+  border-color: rgba(197, 160, 89, 0.2) !important;
+}
+
+.light .text-gold {
+  color: #874c19 !important;
+}
+
+.light .text-gold-300 {
+  color: #593116 !important;
+}
+
+/* Hover behaviors */
+.light .hover\:bg-amber-500\/5:hover {
+  background-color: rgba(197, 160, 89, 0.05) !important;
+}
+
+.light .hover\:border-gold:hover {
+  border-color: #c5a059 !important;
+}
+
+/* Table and list item fixes */
+.light .bg-zinc-900\/50 {
+  background-color: #fafafa !important;
+}
+
+/* Buttons with white outline */
+.light .bg-gold {
+  background-color: #c5a059 !important;
+  color: #ffffff !important;
+}
+
+.light .bg-gold:hover {
+  background-color: #dfb76c !important;
+}
+
+/* MapComponent container */
+.light .rounded-2xl {
+  border-color: #e4e4e7 !important;
+}
+
+/* Footer details */
+.light footer {
+  background-color: #f4f3ef !important;
+  border-top-color: #e4e4e7 !important;
+  color: #52525b !important;
+}
+
+.light footer h3,
+.light footer h4 {
+  color: #18181b !important;
+}
+
+.light footer a {
+  color: #52525b !important;
+}
+
+.light footer a:hover {
+  color: #c5a059 !important;
+}
+
+/* Sub-panels inside book steps */
+.light .bg-\[\#0a0a0c\] {
+  background-color: #f4f4f5 !important;
+}
+
