@@ -237,7 +237,7 @@ export default function RideWithUs() {
 
             <div className="bg-[#121215] rounded-3xl border border-zinc-800/80 overflow-hidden h-44 relative group shadow-xl">
               <img 
-                src="https://images.pexels.com/photos/3807386/pexels-photo-3807386.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                src="https://images.pexels.com/photos/2244746/pexels-photo-2244746.jpeg?auto=compress&cs=tinysrgb&w=600" 
                 alt="Professional Chauffeur"
                 className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition duration-500"
               />
