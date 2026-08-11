@@ -214,7 +214,7 @@ export default function LongDistance() {
           <div className="bg-[#121215] rounded-3xl border border-zinc-800 shadow-xl overflow-hidden flex flex-col">
             <div className="h-48 relative w-full">
               <img 
-                src="https://images.pexels.com/photos/1119796/pexels-photo-1119796.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                src="https://images.pexels.com/photos/593172/pexels-photo-593172.jpeg?auto=compress&cs=tinysrgb&w=600" 
                 alt="Long Distance Road Taxi" 
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
               />
