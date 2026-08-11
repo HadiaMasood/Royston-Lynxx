@@ -212,7 +212,7 @@ export default function ContactUs() {
               <span className="text-[10px] text-zinc-400 mt-2">Southampton Headquarters SO16 7PX</span>
             </div>
             <img 
-              src="https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&w=600" 
+              src="https://images.pexels.com/photos/5082579/pexels-photo-5082579.jpeg?auto=compress&cs=tinysrgb&w=600" 
               alt="Southampton Location Map"
               className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition duration-500"
             />
