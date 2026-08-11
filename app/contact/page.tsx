@@ -203,6 +203,21 @@ export default function ContactUs() {
             </div>
           </div>
 
+          
+          <div className="bg-[#121215] rounded-3xl border border-zinc-800/80 overflow-hidden h-48 relative group cursor-pointer shadow-xl mb-6">
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition z-10 flex flex-col items-center justify-center p-4 text-center">
+              <span className="px-4 py-2 bg-black/80 rounded-lg text-xs font-bold text-gold border border-zinc-800">
+                View Interactive Map
+              </span>
+              <span className="text-[10px] text-zinc-400 mt-2">Southampton Headquarters SO16 7PX</span>
+            </div>
+            <img 
+              src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=600&q=80" 
+              alt="Southampton Location Map"
+              className="w-full h-full object-cover filter grayscale contrast-125 opacity-40 group-hover:scale-105 transition duration-500"
+            />
+          </div>
+
           <div className="bg-black/30 p-6 rounded-2xl border border-zinc-900 flex gap-4 items-center">
             <HelpCircle className="w-10 h-10 text-gold shrink-0" />
             <div className="space-y-1">

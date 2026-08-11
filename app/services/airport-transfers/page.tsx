@@ -223,7 +223,17 @@ export default function AirportTransfers() {
             </div>
           </div>
 
-          <div className="bg-[#121215] p-8 rounded-3xl border border-zinc-800 shadow-xl space-y-6">
+          
+          <div className="bg-[#121215] rounded-3xl border border-zinc-800 shadow-xl overflow-hidden flex flex-col">
+            <div className="h-48 relative w-full">
+              <img 
+                src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" 
+                alt="Airport Chauffeur Transfer" 
+                className="w-full h-full object-cover filter brightness-90 grayscale contrast-125 hover:grayscale-0 transition duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#121215] to-transparent" />
+            </div>
+            <div className="p-8 space-y-6 -mt-4 relative z-10 bg-[#121215]">
             <h3 className="text-lg font-bold text-white font-display border-b border-zinc-800 pb-3">Why Passengers Choose Us</h3>
             <div className="space-y-4">
               <div className="flex gap-4">
@@ -262,7 +272,7 @@ export default function AirportTransfers() {
                 </div>
               </div>
             </div>
-          </div>
+          </div></div>
         </div>
       </section>
 

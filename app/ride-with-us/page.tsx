@@ -234,6 +234,15 @@ export default function RideWithUs() {
                 </li>
               </ul>
             </div>
+
+            <div className="bg-[#121215] rounded-3xl border border-zinc-800/80 overflow-hidden h-44 relative group shadow-xl">
+              <img 
+                src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=600&q=80" 
+                alt="Professional Chauffeur"
+                className="w-full h-full object-cover filter grayscale contrast-125 opacity-40 group-hover:scale-105 transition duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#121215] to-transparent" />
+            </div>
           </div>
 
           {/* Right Column Onboarding Form (7 columns) */}

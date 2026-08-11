@@ -179,7 +179,18 @@ export default function AboutUs() {
             We noticed that travelers frequently faced surge pricing, uncoordinated delays, and inconsistent driver standards. We created Royston Lynxx to provide a premium alternative: fixed, inclusive prices, dedicated flight tracking, clean premium vehicles, and uniform-dressed professional chauffeurs.
           </p>
         </div>
-        <div className="bg-[#121215] p-8 rounded-3xl border border-zinc-800/80 space-y-6 relative overflow-hidden">
+        
+        <div className="bg-[#121215] rounded-3xl border border-zinc-800/80 shadow-xl overflow-hidden flex flex-col relative">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-2xl z-20 pointer-events-none" />
+          <div className="h-48 relative w-full">
+            <img 
+              src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80" 
+              alt="Premium Chauffeur" 
+              className="w-full h-full object-cover filter brightness-90 grayscale contrast-125 hover:grayscale-0 transition duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#121215] to-transparent" />
+          </div>
+          <div className="p-8 space-y-6 -mt-4 relative z-10 bg-[#121215]">
           <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-2xl" />
           <h3 className="font-bold text-white text-lg flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-gold shrink-0" />
@@ -199,7 +210,7 @@ export default function AboutUs() {
               <span><strong>Elite Comfort:</strong> Strictly modern vehicles cleaned and detailed thoroughly before every single dispatch.</span>
             </li>
           </ul>
-        </div>
+        </div></div>
       </section>
 
       {/* Core Values Section */}
