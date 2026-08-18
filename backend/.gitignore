@@ -1,0 +1,20 @@
+# Dependency directories
+node_modules/
+
+# Compiled files
+dist/
+build/
+
+# Environment files
+.env
+
+# Local database file
+data/db.json
+
+# IDE config files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

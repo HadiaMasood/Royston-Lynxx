@@ -20,14 +20,35 @@ export default function ContactUs() {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
       alert('Please fill out all required fields.');
       return;
     }
-    // Simulate real database or API submission success
-    setSubmitted(true);
+
+    const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000';
+    try {
+      const res = await fetch(`${API_BASE}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        if (errorData.errors && Array.isArray(errorData.errors)) {
+          const detail = errorData.errors.map((e: any) => `${e.field}: ${e.message}`).join(', ');
+          throw new Error(`Validation failed: ${detail}`);
+        }
+        throw new Error(errorData.message || 'Failed to submit contact request.');
+      }
+
+      setSubmitted(true);
+    } catch (err: any) {
+      console.error(err);
+      alert(err.message || 'Could not connect to backend server. Please try again later.');
+    }
   };
 
   return (

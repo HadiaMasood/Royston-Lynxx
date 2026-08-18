@@ -1,0 +1,242 @@
+{
+	"info": {
+		"_postman_id": "a901844b-4b1f-4b08-b772-7da4db7e1a0f",
+		"name": "Royston Lynxx API",
+		"description": "Collection for testing all backend endpoints of the Royston Lynxx taxi and airport transfer service with direct URLs.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Status Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/status",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"status"
+					]
+				},
+				"description": "Verifies that the backend API server is running and healthy."
+			},
+			"response": []
+		},
+		{
+			"name": "Bookings",
+			"item": [
+				{
+					"name": "Create Booking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"routeType\": \"one-way\",\n  \"pickup\": \"Southampton Airport\",\n  \"dropoff\": \"London Heathrow Airport\",\n  \"pickupDate\": \"2026-09-01\",\n  \"pickupTime\": \"12:00\",\n  \"passengers\": 2,\n  \"luggage\": 2,\n  \"vehicleClass\": \"Executive Mercedes E-Class\",\n  \"vehicleImage\": \"/assets/images/cars/mercedes-e.png\",\n  \"price\": 120.00,\n  \"passengerName\": \"Jane Doe\",\n  \"passengerEmail\": \"jane.doe@example.com\",\n  \"passengerPhone\": \"+44 7700 900077\",\n  \"flightNumber\": \"BA123\",\n  \"specialRemarks\": \"Need child booster seat\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/bookings",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"bookings"
+							]
+						},
+						"description": "Submits a new airport transfer booking. Returns a generated reference code starting with 'QH-'."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Booking by Reference",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/bookings/QH-870090",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"bookings",
+								"QH-870090"
+							]
+						},
+						"description": "Retrieves the details of a booking using its reference code (defaulting to QH-870090)."
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Booking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/bookings/QH-870090/cancel",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"bookings",
+								"QH-870090",
+								"cancel"
+							]
+						},
+						"description": "Cancels a confirmed booking using its reference code (defaulting to QH-870090)."
+					},
+					"response": []
+				},
+				{
+					"name": "List All Bookings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/bookings",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"bookings"
+							]
+						},
+						"description": "Retrieves the complete list of bookings registered on the server."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contact Submissions",
+			"item": [
+				{
+					"name": "General Inquiry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phone\": \"+44 7700 900088\",\n  \"subject\": \"Booking Inquiry\",\n  \"message\": \"Hello, how much for 6 people from London?\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/contact",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"contact"
+							]
+						},
+						"description": "Submits a general customer service message/inquiry."
+					},
+					"response": []
+				},
+				{
+					"name": "Driver Application",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Tom\",\n  \"lastName\": \"Smith\",\n  \"email\": \"tom.smith@example.com\",\n  \"phone\": \"+44 7700 900099\",\n  \"badgeNumber\": \"PHV-12345\",\n  \"council\": \"Southampton City Council\",\n  \"vehicleModel\": \"Mercedes V-Class Black\",\n  \"message\": \"Looking forward to working with you.\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/contact/driver",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"contact",
+								"driver"
+							]
+						},
+						"description": "Submits a partner driver application form details."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

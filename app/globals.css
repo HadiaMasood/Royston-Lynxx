@@ -228,3 +228,47 @@ html.light-mode body {
   background-color: #f4f4f5 !important;
 }
 
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
+/* GPU-accelerate animated elements to prevent CPU jank */
+[data-framer-motion],
+.motion-div,
+[style*="transform"],
+[style*="opacity"] {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Smooth font rendering on all platforms */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Reduce unnecessary repaints on hover transitions */
+header,
+.card,
+button,
+a {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Scroll performance */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for users who prefer it (accessibility + performance) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

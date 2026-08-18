@@ -12,11 +12,11 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import dynamic from 'next/dynamic';
 
-import saloonTaxiImg from '@/src/assets/images/saloon_taxi_1783422678038.jpg';
-import estateTaxiImg from '@/src/assets/images/estate_taxi_1783422697009.jpg';
-import executiveTaxiImg from '@/src/assets/images/executive_taxi_1783422716940.jpg';
-import mpvTaxiImg from '@/src/assets/images/mpv_taxi_1783422734567.jpg';
-import minibusTaxiImg from '@/src/assets/images/minibus_taxi_1783422753567.jpg';
+import saloonTaxiImg from '@/src/assets/images/saloon_taxi_1783422678038.webp';
+import estateTaxiImg from '@/src/assets/images/estate_taxi_1783422697009.webp';
+import executiveTaxiImg from '@/src/assets/images/executive_taxi_1783422716940.webp';
+import mpvTaxiImg from '@/src/assets/images/mpv_taxi_1783422734567.webp';
+import minibusTaxiImg from '@/src/assets/images/minibus_taxi_1783422753567.webp';
 import MobileMenu from '@/components/MobileMenu';
 
 const MapComponent = dynamic(() => import('@/components/MapComponent'), {
@@ -415,21 +415,36 @@ export default function Home() {
       }
     }
 
-    const stored = localStorage.getItem('roystonlynxx_bookings') || localStorage.getItem('quickhop_bookings');
-    if (stored) {
+    const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000';
+    const fetchBookings = async () => {
       try {
-        const parsed = JSON.parse(stored);
-        bookingsTimer = setTimeout(() => {
-          setBookings(parsed);
-        }, 0);
-      } catch (e) {
-        console.error(e);
+        const res = await fetch(`${API_BASE}/api/bookings`);
+        if (res.ok) {
+          const json = await res.json();
+          if (json.status === 'success' && Array.isArray(json.data)) {
+            setBookings(json.data);
+            localStorage.setItem('roystonlynxx_bookings', JSON.stringify(json.data));
+            return;
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch bookings from backend, falling back to localStorage:", err);
       }
-    }
+      
+      const stored = localStorage.getItem('roystonlynxx_bookings') || localStorage.getItem('quickhop_bookings');
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          setBookings(parsed);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    fetchBookings();
 
     return () => {
       if (recentTimer) clearTimeout(recentTimer);
-      if (bookingsTimer) clearTimeout(bookingsTimer);
       if (themeTimer) clearTimeout(themeTimer);
     };
   }, []);
@@ -693,8 +708,8 @@ export default function Home() {
     }
   };
 
-  // Submit and Save Booking to LocalStorage
-  const handlePaymentSubmit = (e: React.FormEvent) => {
+  // Submit and Save Booking to Backend
+  const handlePaymentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!cardNumber.trim() || !cardName.trim() || !cardExpiry.trim() || !cardCvc.trim()) {
       setAlertMsg({ type: 'error', text: 'Please fill in all credit card payment details.' });
@@ -704,51 +719,72 @@ export default function Home() {
     setPaymentProcessing(true);
     setAlertMsg(null);
 
-    // Simulate Payment delay
-    setTimeout(() => {
-      const ref = `QH-${Math.floor(100000 + Math.random() * 900000)}`;
-      
-      const newBooking = {
-        ref,
-        routeType,
-        pickup: getLocName(pickupId, isCustomPickup, pickupCustom),
-        dropoff: getLocName(dropoffId, isCustomDropoff, dropoffCustom),
-        pickupDate,
-        pickupTime,
-        returnDate: routeType === 'return' ? returnDate : null,
-        returnTime: routeType === 'return' ? returnTime : null,
-        passengers,
-        luggage,
-        vehicleClass: selectedVehicleDetails.name,
-        vehicleImage: selectedVehicleDetails.image,
-        price: totalPrice,
-        passengerName,
-        passengerEmail,
-        passengerPhone,
-        flightNumber,
-        specialRemarks,
-        status: 'Confirmed',
-        createdAt: new Date().toISOString(),
-      };
+    const ref = `QH-${Math.floor(100000 + Math.random() * 900000)}`;
+    const newBooking = {
+      ref,
+      routeType: routeType === 'oneWay' ? 'one-way' : 'return',
+      pickup: getLocName(pickupId, isCustomPickup, pickupCustom),
+      dropoff: getLocName(dropoffId, isCustomDropoff, dropoffCustom),
+      pickupDate,
+      pickupTime,
+      returnDate: routeType === 'return' ? returnDate : null,
+      returnTime: routeType === 'return' ? returnTime : null,
+      passengers,
+      luggage,
+      vehicleClass: selectedVehicleDetails.name,
+      vehicleImage: selectedVehicleDetails.image,
+      price: totalPrice,
+      passengerName,
+      passengerEmail,
+      passengerPhone,
+      flightNumber,
+      specialRemarks,
+    };
 
-      const updatedBookings = [newBooking, ...bookings];
-      localStorage.setItem('roystonlynxx_bookings', JSON.stringify(updatedBookings));
-      setBookings(updatedBookings);
-      
-      setGeneratedReference(ref);
-      setLastCompletedBooking(newBooking);
-      setReceiptBooking(newBooking);
-      setBookingStep(5);
+    const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000';
+    try {
+      const res = await fetch(`${API_BASE}/api/bookings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newBooking),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        if (errorData.errors && Array.isArray(errorData.errors)) {
+          const detail = errorData.errors.map((e: any) => `${e.field}: ${e.message}`).join(', ');
+          throw new Error(`Validation failed: ${detail}`);
+        }
+        throw new Error(errorData.message || 'Failed to submit booking to backend.');
+      }
+
+      const json = await res.json();
+      if (json.status === 'success' && json.data) {
+        const savedBooking = json.data;
+        const updatedBookings = [savedBooking, ...bookings];
+        localStorage.setItem('roystonlynxx_bookings', JSON.stringify(updatedBookings));
+        setBookings(updatedBookings);
+        
+        setGeneratedReference(savedBooking.ref);
+        setLastCompletedBooking(savedBooking);
+        setReceiptBooking(savedBooking);
+        setBookingStep(5);
+        
+        setTrackRef(savedBooking.ref);
+        setTrackEmail(passengerEmail);
+      } else {
+        throw new Error('Malformed response from backend.');
+      }
+    } catch (err: any) {
+      console.error(err);
+      setAlertMsg({ type: 'error', text: err.message || 'Could not connect to backend server. Booking was not saved.' });
+    } finally {
       setPaymentProcessing(false);
-      
-      // Auto-fill track state so they can instantly view it if wanted
-      setTrackRef(ref);
-      setTrackEmail(passengerEmail);
-    }, 1500);
+    }
   };
 
   // Tracking Journey Logic
-  const handleTrackSearch = (e: React.FormEvent) => {
+  const handleTrackSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     setTrackError('');
     setTrackedBooking(null);
@@ -756,6 +792,23 @@ export default function Home() {
     if (!trackRef.trim() || !trackEmail.trim()) {
       setTrackError('Please fill in both the booking reference and email address.');
       return;
+    }
+
+    const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000';
+    try {
+      const res = await fetch(`${API_BASE}/api/bookings/${trackRef.trim()}`);
+      if (res.ok) {
+        const json = await res.json();
+        if (json.status === 'success' && json.data) {
+          const booking = json.data;
+          if (booking.passengerEmail.toLowerCase() === trackEmail.trim().toLowerCase()) {
+            setTrackedBooking(booking);
+            return;
+          }
+        }
+      }
+    } catch (err) {
+      console.error("Failed to query backend for booking, checking local list:", err);
     }
 
     const found = bookings.find(
@@ -766,15 +819,28 @@ export default function Home() {
     if (found) {
       setTrackedBooking(found);
     } else {
-      setTrackError('No active booking found matching those details. Note: If you just reloaded, any test bookings are stored in your local browser state.');
+      setTrackError('No active booking found matching those details. Please check your reference and email address.');
     }
   };
 
-  const handleCancelBooking = (ref: string) => {
+  const handleCancelBooking = async (ref: string) => {
     if (confirm('Are you sure you want to cancel this booking? There is zero cancellation fee.')) {
+      const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000';
+      let cancelledOnBackend = false;
+      try {
+        const res = await fetch(`${API_BASE}/api/bookings/${ref}/cancel`, {
+          method: 'POST',
+        });
+        if (res.ok) {
+          cancelledOnBackend = true;
+        }
+      } catch (err) {
+        console.error("Failed to cancel booking on backend:", err);
+      }
+
       const updated = bookings.map(b => {
         if (b.ref === ref) {
-          return { ...b, status: 'Cancelled' };
+          return { ...b, status: 'Cancelled' as const };
         }
         return b;
       });
@@ -785,7 +851,10 @@ export default function Home() {
         setTrackedBooking({ ...trackedBooking, status: 'Cancelled' });
       }
       
-      setAlertMsg({ type: 'success', text: 'Booking successfully cancelled. Ref: ' + ref });
+      setAlertMsg({ 
+        type: 'success', 
+        text: `Booking successfully cancelled.${cancelledOnBackend ? '' : ' (Saved locally, backend sync failed)'} Ref: ${ref}` 
+      });
     }
   };
 
