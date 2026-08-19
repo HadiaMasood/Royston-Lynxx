@@ -8,7 +8,9 @@ dotenv.config();
 // Determine database file path.
 // If DATABASE_FILE_PATH in env ends with .json, we change it to .sqlite for SQLite
 let rawDbPath = process.env.DATABASE_FILE_PATH || './data/db.sqlite';
-if (rawDbPath.endsWith('.json')) {
+if (process.env.VERCEL) {
+  rawDbPath = '/tmp/db.sqlite';
+} else if (rawDbPath.endsWith('.json')) {
   rawDbPath = rawDbPath.replace(/\.json$/, '.sqlite');
 }
 

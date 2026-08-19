@@ -53,14 +53,21 @@ app.use('/api/contact', contactRouter);
 // Global Error Handler
 app.use(errorHandler);
 
-// Start Server
-initDb()
-  .then(() => {
-    app.listen(PORT, HOST, () => {
-      console.log(`[Server] Royston Lynxx backend listening on http://${HOST}:${PORT}`);
+export { app };
+
+function startServer(): void {
+  initDb()
+    .then(() => {
+      app.listen(PORT, HOST, () => {
+        console.log(`[Server] Royston Lynxx backend listening on http://${HOST}:${PORT}`);
+      });
+    })
+    .catch((err) => {
+      console.error('[Server] Failed to initialize database:', err);
+      process.exit(1);
     });
-  })
-  .catch((err) => {
-    console.error('[Server] Failed to initialize database:', err);
-    process.exit(1);
-  });
+}
+
+if (require.main === module) {
+  startServer();
+}
