@@ -6,7 +6,7 @@ import crypto from 'crypto';
 const router = Router();
 
 // POST submit contact inquiry
-router.post('/', validateBody(contactValidationSchema), (req: Request, res: Response, next: NextFunction): void => {
+router.post('/', validateBody(contactValidationSchema), async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const payload = req.body;
     const id = crypto.randomUUID();
@@ -21,7 +21,7 @@ router.post('/', validateBody(contactValidationSchema), (req: Request, res: Resp
       createdAt: new Date().toISOString()
     };
 
-    ContactsRepository.saveSubmission(submission);
+    await ContactsRepository.saveSubmission(submission);
 
     res.status(201).json({
       status: 'success',
@@ -34,7 +34,7 @@ router.post('/', validateBody(contactValidationSchema), (req: Request, res: Resp
 });
 
 // POST submit driver application
-router.post('/driver', validateBody(driverValidationSchema), (req: Request, res: Response, next: NextFunction): void => {
+router.post('/driver', validateBody(driverValidationSchema), async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const payload = req.body;
     const id = crypto.randomUUID();
@@ -52,7 +52,7 @@ router.post('/driver', validateBody(driverValidationSchema), (req: Request, res:
       createdAt: new Date().toISOString()
     };
 
-    ContactsRepository.saveDriverApplication(application);
+    await ContactsRepository.saveDriverApplication(application);
 
     res.status(201).json({
       status: 'success',

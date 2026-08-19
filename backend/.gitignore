@@ -8,8 +8,9 @@ build/
 # Environment files
 .env
 
-# Local database file
+# Local database files
 data/db.json
+data/db.sqlite
 
 # IDE config files
 .vscode/

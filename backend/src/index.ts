@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import bookingsRouter from './routes/bookings';
 import contactRouter from './routes/contact';
 import { errorHandler } from './middleware/error';
+import { initDb } from './config/db';
 
 dotenv.config();
 
@@ -53,6 +54,13 @@ app.use('/api/contact', contactRouter);
 app.use(errorHandler);
 
 // Start Server
-app.listen(PORT, HOST, () => {
-  console.log(`[Server] Royston Lynxx backend listening on http://${HOST}:${PORT}`);
-});
+initDb()
+  .then(() => {
+    app.listen(PORT, HOST, () => {
+      console.log(`[Server] Royston Lynxx backend listening on http://${HOST}:${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error('[Server] Failed to initialize database:', err);
+    process.exit(1);
+  });

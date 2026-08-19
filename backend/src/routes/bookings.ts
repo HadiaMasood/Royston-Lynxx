@@ -5,9 +5,9 @@ import { validateBody, bookingValidationSchema } from '../middleware/validation'
 const router = Router();
 
 // GET all bookings (Admin/Debug view)
-router.get('/', (req: Request, res: Response, next: NextFunction) => {
+router.get('/', async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const bookings = BookingsRepository.getAll();
+    const bookings = await BookingsRepository.getAll();
     res.json({ status: 'success', data: bookings });
   } catch (error) {
     next(error);
@@ -15,7 +15,7 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 
 // GET single booking by reference
-router.get('/:ref', (req: Request, res: Response, next: NextFunction): void => {
+router.get('/:ref', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { ref } = req.params;
     if (!ref) {
@@ -23,7 +23,7 @@ router.get('/:ref', (req: Request, res: Response, next: NextFunction): void => {
       return;
     }
 
-    const booking = BookingsRepository.getByRef(ref);
+    const booking = await BookingsRepository.getByRef(ref);
     if (!booking) {
       res.status(404).json({ status: 'error', message: `Booking with reference ${ref} not found` });
       return;
@@ -36,7 +36,7 @@ router.get('/:ref', (req: Request, res: Response, next: NextFunction): void => {
 });
 
 // POST create booking
-router.post('/', validateBody(bookingValidationSchema), (req: Request, res: Response, next: NextFunction): void => {
+router.post('/', validateBody(bookingValidationSchema), async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const payload = req.body;
     
@@ -67,7 +67,7 @@ router.post('/', validateBody(bookingValidationSchema), (req: Request, res: Resp
       createdAt: new Date().toISOString()
     };
 
-    BookingsRepository.save(newBooking);
+    await BookingsRepository.save(newBooking);
 
     res.status(201).json({
       status: 'success',
@@ -80,7 +80,7 @@ router.post('/', validateBody(bookingValidationSchema), (req: Request, res: Resp
 });
 
 // POST cancel booking
-router.post('/:ref/cancel', (req: Request, res: Response, next: NextFunction): void => {
+router.post('/:ref/cancel', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { ref } = req.params;
     if (!ref) {
@@ -88,13 +88,13 @@ router.post('/:ref/cancel', (req: Request, res: Response, next: NextFunction): v
       return;
     }
 
-    const updated = BookingsRepository.updateStatus(ref, 'Cancelled');
+    const updated = await BookingsRepository.updateStatus(ref, 'Cancelled');
     if (!updated) {
       res.status(404).json({ status: 'error', message: `Booking with reference ${ref} not found` });
       return;
     }
 
-    const booking = BookingsRepository.getByRef(ref);
+    const booking = await BookingsRepository.getByRef(ref);
     res.json({
       status: 'success',
       message: 'Booking cancelled successfully',
